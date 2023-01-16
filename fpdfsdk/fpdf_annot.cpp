@@ -524,6 +524,23 @@ FPDF_EXPORT int FPDF_CALLCONV FPDFAnnot_AddInkStroke(FPDF_ANNOTATION annot,
   return static_cast<int>(inklist->size() - 1);
 }
 
+FPDF_EXPORT int FPDF_CALLCONV
+FPDFAnnot_SetInkStrokeWidth(FPDF_ANNOTATION annot, int width)
+{
+    if (FPDFAnnot_GetSubtype(annot) != FPDF_ANNOT_INK || width < 0) {
+        return -1;
+    }
+    CPDF_Dictionary *annot_dict = GetAnnotDictFromFPDFAnnotation(annot);
+
+    CPDF_Dictionary *bs_dict = annot_dict->GetDictFor("BS");
+
+    if (!bs_dict)
+        bs_dict = annot_dict->SetNewFor<CPDF_Dictionary>("BS");
+
+    bs_dict->SetNewFor<CPDF_Number>("W", width);
+    return width;
+}
+
 FPDF_EXPORT FPDF_BOOL FPDF_CALLCONV
 FPDFAnnot_RemoveInkList(FPDF_ANNOTATION annot) {
   if (FPDFAnnot_GetSubtype(annot) != FPDF_ANNOT_INK)
