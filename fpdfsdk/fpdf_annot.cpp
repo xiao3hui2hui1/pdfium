@@ -530,9 +530,10 @@ FPDFAnnot_SetInkStrokeWidth(FPDF_ANNOTATION annot, int width)
     if (FPDFAnnot_GetSubtype(annot) != FPDF_ANNOT_INK || width < 0) {
         return -1;
     }
-    CPDF_Dictionary *annot_dict = GetAnnotDictFromFPDFAnnotation(annot);
 
-    CPDF_Dictionary *bs_dict = annot_dict->GetDictFor("BS");
+    RetainPtr<CPDF_Dictionary> annot_dict = GetMutableAnnotDictFromFPDFAnnotation(annot);
+
+    RetainPtr<CPDF_Dictionary> bs_dict = annot_dict->GetMutableDictFor("BS");
 
     if (!bs_dict)
         bs_dict = annot_dict->SetNewFor<CPDF_Dictionary>("BS");
