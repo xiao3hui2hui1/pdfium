@@ -234,6 +234,9 @@ FPDF_EXPORT int FPDF_CALLCONV FPDFAnnot_AddInkStroke(FPDF_ANNOTATION annot,
 // 设置笔迹线宽
 FPDF_EXPORT int FPDF_CALLCONV FPDFAnnot_SetInkStrokeWidth(FPDF_ANNOTATION annot, int width);
   
+// 获取笔迹线宽
+FPDF_EXPORT int FPDF_CALLCONV FPDFAnnot_GetInkStrokeWidth(FPDF_ANNOTATION annot);
+                                                          
 // Experimental API.
 // Removes an InkList in |annot|.
 // This API works only for ink annotations.
