@@ -660,7 +660,7 @@ bool GenerateInkAP(CPDF_Document* pDoc, CPDF_Dictionary* pAnnotDict) {
   // Set inflated rect as a new rect because paths near the border with large
   // width should not be clipped to the original rect.
   CFX_FloatRect rect = pAnnotDict->GetRectFor(pdfium::annotation::kRect);
-  rect.Inflate(fBorderWidth / 2, fBorderWidth / 2);
+  rect.Inflate(fBorderWidth, fBorderWidth);
   pAnnotDict->SetRectFor(pdfium::annotation::kRect, rect);
 
   for (size_t i = 0; i < pInkList->size(); i++) {
