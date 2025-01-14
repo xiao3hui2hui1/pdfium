@@ -648,6 +648,8 @@ bool GenerateInkAP(CPDF_Document* pDoc, CPDF_Dictionary* pAnnotDict) {
   sAppStream << fBorderWidth << " w ";
   sAppStream << GetDashPatternString(pAnnotDict);
 
+
+  
   // Set inflated rect as a new rect because paths near the border with large
   // width should not be clipped to the original rect.
   CFX_FloatRect rect = pAnnotDict->GetRectFor(pdfium::annotation::kRect);
