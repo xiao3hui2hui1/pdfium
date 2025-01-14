@@ -648,7 +648,14 @@ bool GenerateInkAP(CPDF_Document* pDoc, CPDF_Dictionary* pAnnotDict) {
   sAppStream << fBorderWidth << " w ";
   sAppStream << GetDashPatternString(pAnnotDict);
 
+  // 设置线条端点样式为圆头
+  sAppStream << 1 << " J ";
 
+  // 设置线条连接样式为圆角
+  sAppStream << 1 << " j ";
+
+  // 设置尖锐程度
+  sAppStream << 10 << " M ";
   
   // Set inflated rect as a new rect because paths near the border with large
   // width should not be clipped to the original rect.
