@@ -542,6 +542,24 @@ FPDFAnnot_SetInkStrokeWidth(FPDF_ANNOTATION annot, int width)
     return width;
 }
 
+FPDF_EXPORT float FPDF_CALLCONV
+FPDFAnnot_SetInkStrokeWidth(FPDF_ANNOTATION annot, float width)
+{
+    if (FPDFAnnot_GetSubtype(annot) != FPDF_ANNOT_INK || width < 0) {
+        return -1;
+    }
+
+    RetainPtr<CPDF_Dictionary> annot_dict = GetMutableAnnotDictFromFPDFAnnotation(annot);
+
+    RetainPtr<CPDF_Dictionary> bs_dict = annot_dict->GetMutableDictFor("BS");
+
+    if (!bs_dict)
+        bs_dict = annot_dict->SetNewFor<CPDF_Dictionary>("BS");
+
+    bs_dict->SetNewFor<CPDF_Number>("W", width);
+    return width;
+}
+
 FPDF_EXPORT int FPDF_CALLCONV
 FPDFAnnot_GetInkStrokeWidth(FPDF_ANNOTATION annot)
 {
